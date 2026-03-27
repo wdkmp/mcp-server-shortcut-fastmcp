@@ -12,9 +12,12 @@ import re
 from datetime import date, datetime
 from typing import Annotated, Any, Optional
 
+from dotenv import load_dotenv
 from fastmcp import FastMCP
 
 from shortcut_client import ShortcutClient
+
+load_dotenv()
 
 # ── Configuration ──────────────────────────────────────────────
 
