@@ -1,0 +1,20 @@
+[project]
+name = "mcp-server-shortcut"
+version = "0.1.0"
+description = "Shortcut MCP Server powered by FastMCP"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=2.0.0",
+    "httpx>=0.27.0",
+]
+
+[project.scripts]
+mcp-server-shortcut = "server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+include = ["server.py", "shortcut_client.py"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
