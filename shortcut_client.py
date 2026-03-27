@@ -126,10 +126,7 @@ class ShortcutClient:
             return []
 
     def search_stories(self, query: str, page_size: int = 25, next_token: str | None = None) -> dict:
-        body: dict[str, Any] = {"query": query, "page_size": page_size, "detail": "full"}
-        if next_token:
-            body["next"] = next_token
-        return self._post("/search/stories", json=body)
+        return self._get("/search/stories", query=query, page_size=page_size, detail="full", next=next_token)
 
     def create_story(self, params: dict) -> dict:
         return self._post("/stories", json=params)
@@ -167,10 +164,7 @@ class ShortcutClient:
             return None
 
     def search_epics(self, query: str, page_size: int = 25, next_token: str | None = None) -> dict:
-        body: dict[str, Any] = {"query": query, "page_size": page_size, "detail": "full"}
-        if next_token:
-            body["next"] = next_token
-        return self._post("/search/epics", json=body)
+        return self._get("/search/epics", query=query, page_size=page_size, detail="full", next=next_token)
 
     def create_epic(self, params: dict) -> dict:
         return self._post("/epics", json=params)
@@ -202,10 +196,7 @@ class ShortcutClient:
         return self._get(f"/iterations/{iteration_id}/stories", includes_description=includes_description)
 
     def search_iterations(self, query: str, page_size: int = 25, next_token: str | None = None) -> dict:
-        body: dict[str, Any] = {"query": query, "page_size": page_size, "detail": "full"}
-        if next_token:
-            body["next"] = next_token
-        return self._post("/search/iterations", json=body)
+        return self._get("/search/iterations", query=query, page_size=page_size, detail="full", next=next_token)
 
     def create_iteration(self, params: dict) -> dict:
         return self._post("/iterations", json=params)
@@ -225,10 +216,7 @@ class ShortcutClient:
             return None
 
     def search_milestones(self, query: str, page_size: int = 25, next_token: str | None = None) -> dict:
-        body: dict[str, Any] = {"query": query, "page_size": page_size, "detail": "full"}
-        if next_token:
-            body["next"] = next_token
-        return self._post("/search/milestones", json=body)
+        return self._get("/search/milestones", query=query, page_size=page_size, detail="full", next=next_token)
 
     # ── Labels ─────────────────────────────────────────────────
 
@@ -281,4 +269,4 @@ class ShortcutClient:
         return self._put(f"/docs/{doc_id}", json=params)
 
     def search_docs(self, params: dict) -> dict:
-        return self._post("/docs/search", json=params)
+        return self._get("/docs/search", **params)
